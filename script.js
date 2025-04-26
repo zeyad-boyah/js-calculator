@@ -144,6 +144,7 @@ document.querySelector(".equal").addEventListener("click", () => {
   if (result !== null) {
     displayValue = parseFloat(parseFloat(result).toFixed(10)).toString();
     updateDisplay();
+    // reset flags
     firstValue = null;
     operator = null;
     resultDisplayed = true;
@@ -153,5 +154,23 @@ document.querySelector(".equal").addEventListener("click", () => {
 document.querySelector(".clear").addEventListener("click", resetCalculator);
 document.querySelector(".backspace").addEventListener("click", backspace);
 
+// Keyboard support
+window.addEventListener("keydown", (e) => {
+    if (e.key >= "0" && e.key <= "9") {
+      inputDigit(e.key);
+    } else if (e.key === ".") {
+      inputDecimal();
+    } else if (["+", "-", "*", "/"].includes(e.key)) {
+      handleOperator(e.key);
+    } else if (e.key === "Enter" || e.key === "=") {
+      e.preventDefault();
+    //   trigger the click event for "=" since it has all the needed logic
+      document.querySelector(".equal").click();
+    } else if (e.key === "Backspace") {
+      backspace();
+    } else if (e.key === "Escape") {
+      resetCalculator();
+    }
+  });
 
 updateDisplay();
