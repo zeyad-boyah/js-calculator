@@ -83,6 +83,7 @@ function handleOperator(op) {
     firstValue = displayValue;
   } 
 //   if first value was provided then operate on the stored first value and the displayed value (second value)
+// so now we can chain operations without hitting '=' like so 12 → + → 7 → - 
   else {
     const result = operate(operator, firstValue, displayValue);
     if (result !== null) {
